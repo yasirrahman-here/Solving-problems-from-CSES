@@ -1,0 +1,46 @@
+      #include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int n,k;
+    cin>>n>>k;
+    vector<int> a(n);
+    for(int i=0;i<n;i++) cin>>a[i];
+
+    multiset<int> s;
+    for(int i=0;i<k;i++){
+     s.insert(a[i]);
+    }
+
+     auto it=s.begin();
+     advance(it,(k-1)/2);
+     cout<<*it<<" ";
+
+     for(int i=k;i<n;i++){
+        int in=a[i];
+        int out=a[i-k];
+
+        s.insert(in);
+        if(in<*it)
+        it--;
+
+        auto del=s.find(out);
+        if(del==it)
+        it++;
+        else if(out<*it)
+        it++;
+        s.erase(del);
+
+        cout<<*it<<" ";
+     }
+
+     cout<<"\n";
+        
+    
+    
+    return 0;
+}
+```
